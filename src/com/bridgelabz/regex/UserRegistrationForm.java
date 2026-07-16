@@ -8,13 +8,13 @@ public class UserRegistrationForm {
     static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //Taking user input
-        String email = sc.nextLine();
+        String mobileNum = sc.nextLine();
 
-        //Regex to validate email
-        Pattern fn = Pattern.compile("^[A-Za-z0-9_.-]+@[A-Za-z_.-]+\\.[a-z]{2,}$");
+        //Regex to validate mobile number
+        Pattern fn = Pattern.compile("^91\\s[6-9][0-9]{9,}$");
 
-        //Matcher to check whether the email is matches with the regex
-        Matcher m = fn.matcher(email);
+        //Matcher to check whether the mobile number is matches with the regex
+        Matcher m = fn.matcher(mobileNum);
 
         //Prints true if matches otherwise false
         System.out.println(m.matches());
