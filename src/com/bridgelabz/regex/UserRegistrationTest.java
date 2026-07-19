@@ -2,6 +2,8 @@ package com.bridgelabz.regex;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -80,5 +82,37 @@ public class UserRegistrationTest {
     void invalidPassword() {
         assertFalse(validator.validatePassword("angel"));
     }
+
+    //Parameterized test for valid emails
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "abc@yahoo.com",
+            "abc-100@yahoo.com",
+            "abc.100@yahoo.com",
+            "abc111@abc.com",
+            "abc-100@abc.net",
+            "abc.100@abc.com.au",
+            "abc@1.com",
+            "abc@gmail.com.com",
+            "abc+100@gmail.com"
+    })
+    void validEmails(String email) {
+        assertTrue(validator.validateEmail(email));
+    }
+
+    //Parameterized test for invalid emails
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "abc",
+            "abc@",
+            "@gmail.com",
+            "abc@gmail",
+            "abc@gmail.",
+            "abc@.com"
+    })
+    void givenInvalidEmails_ReturnFalse(String email) {
+        assertFalse(validator.validateEmail(email));
+    }
+
 }
 
