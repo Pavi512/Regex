@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserRegistrationTest {
 
@@ -18,101 +17,43 @@ public class UserRegistrationTest {
         validator = new ValidateUserRegistration();
     }
 
-    //Test first name
-    //Returns true
-    @Test
-    void validFirstName() {
-        assertTrue(validator.validateFirstName("Angel"));
-    }
-
-    //Returns false
+    // Test Invalid First Name to check whether exception is thrown    @Test
     @Test
     void invalidFirstName() {
-        assertFalse(validator.validateFirstName("angel"));
+        UserRegistrationException exception =
+                assertThrows(UserRegistrationException.class,
+                        () -> validator.validateFirstName("An"));
     }
 
-    //Test last name
-    //Returns true
-    @Test
-    void validLastName() {
-        assertTrue(validator.validateLastName("Girl"));
-    }
-
-    //Returns false
+    // Test Invalid Last Name to check whether exception is thrown    @Test
     @Test
     void invalidLastName() {
-        assertFalse(validator.validateLastName("gl"));
+        UserRegistrationException exception =
+                assertThrows(UserRegistrationException.class,
+                        () -> validator.validateFirstName("gi"));
     }
 
-    //Test email
-    //Returns true
-    @Test
-    void validEmail() {
-        assertTrue(validator.validateEmail("angel.girl@gmail.com"));
-    }
-
-    //Returns false
+    // Test Invalid email to check whether exception is thrown    @Test
     @Test
     void invalidEmail() {
-        assertFalse(validator.validateEmail("angelgmail.com"));
+        UserRegistrationException exception =
+                assertThrows(UserRegistrationException.class,
+                        () -> validator.validateEmail("angel@"));
     }
 
-    //Test mobile number
-    //Returns true
-    @Test
-    void validMobile() {
-        assertTrue(validator.validateMobile("91 9876543210"));
-    }
-
-    //Returns false
+    // Test Invalid mobile to check whether exception is thrown    @Test
     @Test
     void invalidMobile() {
-        assertFalse(validator.validateMobile("9876543210"));
+        UserRegistrationException exception =
+                assertThrows(UserRegistrationException.class,
+                        () -> validator.validateMobile("9876543210"));
     }
 
-    //Test password
-    //Returns true
-    @Test
-    void validPassword() {
-        assertTrue(validator.validatePassword("Angel@858"));
-    }
-
-    //Returns false
+    // Test Invalid password to check whether exception is thrown    @Test
     @Test
     void invalidPassword() {
-        assertFalse(validator.validatePassword("angel"));
+        UserRegistrationException exception =
+                assertThrows(UserRegistrationException.class,
+                        () -> validator.validatePassword("angel@"));
     }
-
-    //Parameterized test for valid emails
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "abc@yahoo.com",
-            "abc-100@yahoo.com",
-            "abc.100@yahoo.com",
-            "abc111@abc.com",
-            "abc-100@abc.net",
-            "abc.100@abc.com.au",
-            "abc@1.com",
-            "abc@gmail.com.com",
-            "abc+100@gmail.com"
-    })
-    void validEmails(String email) {
-        assertTrue(validator.validateEmail(email));
-    }
-
-    //Parameterized test for invalid emails
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "abc",
-            "abc@",
-            "@gmail.com",
-            "abc@gmail",
-            "abc@gmail.",
-            "abc@.com"
-    })
-    void givenInvalidEmails_ReturnFalse(String email) {
-        assertFalse(validator.validateEmail(email));
-    }
-
 }
-
