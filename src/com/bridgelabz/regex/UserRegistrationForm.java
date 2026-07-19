@@ -1,22 +1,55 @@
 package com.bridgelabz.regex;
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+class ValidateUserRegistration {
+    //To validate FirstName
+    public boolean validateFirstName(String firstName) {
+        return Pattern.matches("^[A-Z][a-z]{3,}$", firstName);
+    }
+
+    //To validate LastName
+    public boolean validateLastName(String lastName) {
+        return Pattern.matches("^[A-Z][a-z]{3,}$", lastName);
+    }
+
+    //To validate Email
+    public boolean validateEmail(String email) {
+        return Pattern.matches("^[A-Za-z0-9_.+-]+@[A-Za-z0-9_.-]+\\.[a-z]{2,}$", email);
+    }
+
+    //To validate Mobile
+    public boolean validateMobile(String mobile) {
+        return Pattern.matches("^91\\s[6-9][0-9]{9}$", mobile);
+    }
+
+    //To validate Password
+    public boolean validatePassword(String password) {
+        return Pattern.matches("^(?=.*[A-Z])+(?=.*[a-z])+(?=.*[0-9])+(?=.*[@#$&*+]).{8,}$", password);
+    }
+}
+
 public class UserRegistrationForm {
-    static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        //Taking user input
-        String password = sc.nextLine();
 
-        //Regex to validate password
-        Pattern fn = Pattern.compile("^(?=.*[A-Z])+(?=.*[a-z])+(?=.*[0-9])+(?=.*[@#$&*+]).{8,}$");
+    public static void main(String[] args) {
 
-        //Matcher to check whether the password is matches with the regex
-        Matcher m = fn.matcher(password);
+        ValidateUserRegistration user = new ValidateUserRegistration();
 
-        //Prints true if matches otherwise false
-        System.out.println(m.matches());
+        //Valid emails
+        String[] emails = {
+                "abc@yahoo.com",
+                "abc-100@yahoo.com",
+                "abc.100@yahoo.com",
+                "abc111@abc.com",
+                "abc-100@abc.net",
+                "abc.100@abc.com.au",
+                "abc@1.com",
+                "abc@gmail.com.com",
+                "abc+100@gmail.com"
+        };
+
+        for (String email : emails) {
+            System.out.println(email + " : " + user.validateEmail(email));
+        }
     }
 }
