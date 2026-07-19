@@ -28,28 +28,3 @@ class ValidateUserRegistration {
         return Pattern.matches("^(?=.*[A-Z])+(?=.*[a-z])+(?=.*[0-9])+(?=.*[@#$&*+]).{8,}$", password);
     }
 }
-
-public class UserRegistrationForm {
-
-    public static void main(String[] args) {
-
-        ValidateUserRegistration user = new ValidateUserRegistration();
-
-        //Valid emails
-        String[] emails = {
-                "abc@yahoo.com",
-                "abc-100@yahoo.com",
-                "abc.100@yahoo.com",
-                "abc111@abc.com",
-                "abc-100@abc.net",
-                "abc.100@abc.com.au",
-                "abc@1.com",
-                "abc@gmail.com.com",
-                "abc+100@gmail.com"
-        };
-
-        for (String email : emails) {
-            System.out.println(email + " : " + user.validateEmail(email));
-        }
-    }
-}
