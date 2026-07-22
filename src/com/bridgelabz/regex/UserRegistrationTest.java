@@ -20,40 +20,35 @@ public class UserRegistrationTest {
     // Test Invalid First Name to check whether exception is thrown    @Test
     @Test
     void invalidFirstName() {
-        UserRegistrationException exception =
-                assertThrows(UserRegistrationException.class,
-                        () -> validator.validateFirstName("An"));
+        assertThrows(UserRegistrationException.class,
+                () -> validator.firstNameValidator.validate("An"));
     }
 
     // Test Invalid Last Name to check whether exception is thrown    @Test
     @Test
     void invalidLastName() {
-        UserRegistrationException exception =
-                assertThrows(UserRegistrationException.class,
-                        () -> validator.validateFirstName("gi"));
+        assertThrows(UserRegistrationException.class,
+                () -> validator.lastNameValidator.validate("gi"));
     }
 
     // Test Invalid email to check whether exception is thrown    @Test
     @Test
     void invalidEmail() {
-        UserRegistrationException exception =
-                assertThrows(UserRegistrationException.class,
-                        () -> validator.validateEmail("angel@"));
+        assertThrows(UserRegistrationException.class,
+                () -> validator.emailValidator.validate("angel@"));
     }
 
     // Test Invalid mobile to check whether exception is thrown    @Test
     @Test
     void invalidMobile() {
-        UserRegistrationException exception =
-                assertThrows(UserRegistrationException.class,
-                        () -> validator.validateMobile("9876543210"));
+        assertThrows(UserRegistrationException.class,
+                () -> validator.mobileValidator.validate("9876543210"));
     }
 
     // Test Invalid password to check whether exception is thrown    @Test
     @Test
     void invalidPassword() {
-        UserRegistrationException exception =
-                assertThrows(UserRegistrationException.class,
-                        () -> validator.validatePassword("angel@"));
+        assertThrows(UserRegistrationException.class,
+                () -> validator.passwordValidator.validate("angel@"));
     }
 }
